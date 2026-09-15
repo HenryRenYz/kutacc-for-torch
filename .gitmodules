@@ -1,0 +1,6 @@
+[submodule "kupl"]
+	path = third_party/kupl
+	url = https://github.com/kunpengcompute/kupl.git
+[submodule "kutacc"]
+	path = third_party/kutacc
+	url = https://github.com/HenryRenYz/kutacc.git
