@@ -39,17 +39,64 @@ packed and restored according to their logical element order. Negative strides,
 expanded/zero-stride dimensions, sparse layouts, and overlapping output views
 are rejected.
 
-## Build on 920f-4
+## Build
+
+The build integrates kutacc and kupl: either build them from the pinned
+submodules in `third_party/` (vendored, default when no pre-installed
+prefixes are found), or link against existing installs discovered through
+`KUTACC_HOME`/`KUPL_HOME` (system mode). Both modes produce a self-contained
+wheel: the required shared libraries of the closure (libkutacc, libkupl, the
+compiler runtimes such as libomp/libc++/libc++abi/libunwind, libnuma,
+libibverbs) are bundled under `kutacc_for_torch/lib` with `$ORIGIN` RPATHs,
+so installing the wheel needs no environment variables — like torch or numpy.
+
+Toolchain and dependency locations are passed through the standard
+environment variables; nothing is hard-coded to a particular machine:
 
 ```bash
-source ~/.bashrc
-conda activate af3
-export CC=/home/ryz/BiShengCompiler-5.1.0.2-aarch64-linux/bin/clang
-export CXX=/home/ryz/BiShengCompiler-5.1.0.2-aarch64-linux/bin/clang++
-export KUTACC_HOME=/home/ryz/autosync/comm-test/kutacc-install-more
-export KUPL_HOME=/home/ryz/autosync/comm-test/kupl-install
-export BISHENG_HOME=/home/ryz/BiShengCompiler-5.1.0.2-aarch64-linux
+pip install patchelf            # once; used to rewrite RPATHs while bundling
+./scripts/bootstrap.sh          # once; fetches third_party/{kupl,kutacc}
+
+# compilers for the vendored CMake builds (kutacc requires clang)
+export CC=$(which clang)
+export CXX=$(which clang++)
+
+# optional: BiSheng-based toolchains provide clang and the libomp/libc++
+# runtimes that get bundled into the wheel
+# export BISHENG_HOME=/path/to/BiShengCompiler-...
+
 python -m pip install -v --no-build-isolation .
+```
+
+Dependency-source selection (`KUTACC_FOR_TORCH_DEPS=auto|vendored|system`,
+default `auto` — system when `KUTACC_HOME`/`KUPL_HOME` point at valid
+prefixes, vendored otherwise):
+
+```bash
+# force building kutacc/kupl from the pinned third_party/ sources
+KUTACC_FOR_TORCH_DEPS=vendored python -m pip install -v --no-build-isolation .
+
+# or use existing install prefixes
+KUTACC_FOR_TORCH_DEPS=system \
+KUTACC_HOME=/path/to/kutacc-install KUPL_HOME=/path/to/kupl-install \
+    python -m pip install -v --no-build-isolation .
+```
+
+Vendored builds compile `third_party/kupl` and `third_party/kutacc` at the
+pinned commits; results are staged in `build/deps/staging`. Set
+`KUTACC_FOR_TORCH_DEPS_CLEAN=1` to force a full rebuild. To keep the
+historical non-bundled behaviour (absolute RPATHs into the install prefixes,
+no bundled libraries) set `KUTACC_FOR_TORCH_BUNDLE=0`.
+
+The wheel version embeds the torch ABI it was compiled against (for example
+`0.2.0+torch2.14.0.cpu`), mirroring how torch ships `+cpu`/`+cu124`
+variants; build one wheel per torch build.
+
+If `bootstrap.sh` cannot fetch a submodule (for example in a network-restricted
+environment), point it at any reachable mirror:
+
+```bash
+KUTACC_FOR_TORCH_KUTACC_MIRROR=/path/to/a/kutacc/clone ./scripts/bootstrap.sh
 ```
 
 Importing `kutacc_for_torch` registers the backend:

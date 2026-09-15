@@ -4,4 +4,6 @@ dist/
 *.so
 __pycache__/
 .pytest_cache/
+kutacc_for_torch/lib/
+kutacc_for_torch/include/*.h
 

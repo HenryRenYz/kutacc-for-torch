@@ -1,0 +1,14 @@
+graft kutacc_for_torch
+graft csrc
+graft scripts
+graft tools
+graft tests
+graft third_party
+prune third_party/kupl/build
+prune third_party/kupl/test
+prune third_party/kutacc/build
+prune third_party/kutacc/test
+prune third_party/kutacc/doc
+prune third_party/kutacc/thirdparty
+include pyproject.toml MANIFEST.in README.md .gitmodules
+global-exclude *.py[cod] __pycache__ .git .pytest_cache

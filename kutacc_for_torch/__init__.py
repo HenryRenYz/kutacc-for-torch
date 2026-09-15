@@ -1,11 +1,47 @@
+# Copyright (c) 2026 Huawei Technologies Co., Ltd. All Rights Reserved.
+#
+# Licensed under a modified version of the MIT license. See LICENSE in the project root for license information.
+
 """PyTorch distributed backend backed by Kutacc."""
 
+import ctypes
+import glob
 import os
 from datetime import timedelta
 from typing import Optional, Sequence
 
 import torch
 import torch.distributed as dist
+
+_LIB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lib")
+
+# Load order matters: runtimes first (libc++/unwind), then OpenMP and the
+# verb core, then kupl and kutacc.  RTLD_GLOBAL makes each SONAME available
+# to the next load, so _C resolves everything even before its $ORIGIN RPATH
+# is consulted.
+_PRELOAD_ORDER = (
+    "libunwind.so*",
+    "libc++abi.so*",
+    "libc++.so*",
+    "libnuma.so*",
+    "libgomp.so*",
+    "libomp.so*",
+    "libibverbs.so*",
+    "libkupl.so*",
+    "libkutacc.so*",
+)
+
+
+def _preload_bundled_libraries() -> None:
+    for pattern in _PRELOAD_ORDER:
+        for path in sorted(glob.glob(os.path.join(_LIB_DIR, pattern))):
+            try:
+                ctypes.CDLL(path, mode=ctypes.RTLD_GLOBAL)
+            except OSError as exc:
+                raise ImportError(f"failed to load bundled library {path}: {exc}") from exc
+
+
+_preload_bundled_libraries()
 
 from . import _C
 

@@ -1,4 +1,6 @@
 [build-system]
-requires = ["setuptools>=64", "wheel"]
+# patchelf ships manylinux wheels and is used to rewrite RPATHs when bundling
+# the shared libraries; the build itself must run with --no-build-isolation so
+# that the already-installed torch provides torch.utils.cpp_extension.
+requires = ["setuptools>=64", "wheel", "patchelf>=0.17"]
 build-backend = "setuptools.build_meta"
-
