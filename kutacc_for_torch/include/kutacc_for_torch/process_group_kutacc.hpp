@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Huawei Technologies Co., Ltd. All Rights Reserved.
+ *
+ * Licensed under a modified version of the MIT license. See LICENSE in the project root for license information.
+ */
+
 #pragma once
 
 #include <ATen/ATen.h>

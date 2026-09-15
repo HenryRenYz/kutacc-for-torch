@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+# Copyright (c) 2026 Huawei Technologies Co., Ltd. All Rights Reserved.
+#
+# Licensed under a modified version of the MIT license. See LICENSE in the project root for license information.
+
 set -euo pipefail
 
 rank="${OMPI_COMM_WORLD_RANK:?OMPI_COMM_WORLD_RANK is required}"

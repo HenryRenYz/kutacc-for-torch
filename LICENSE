@@ -1,0 +1,34 @@
+Open Software License
+
+Important Notice
+======================================================================
+
+This Open Software License 1.0 (hereinafter referred to as this "License") is a modified version of the the MIT License, includes all of the terms and conditions of the MIT License, and additional conditions as below.
+
+BY DOWNLOADING, INSTALLING, OR USING THE SOFTWARE, YOU AGREE YOU HAVE FULLY UNDERSTOOD AND ACCEPTED THE TERMS CONTAINED HEREIN. IF YOU DO NOT AGREE TO ANY OF THE TERMS OF THIS LICENSE, OR IF YOU DO NOT QUALIFY FOR AGREEING TO THIS LICENSE, YOU ARE NOT AUTHORIZED TO AND SHALL NOT DOWNLOAD, INSTALL, OR MAKE ANY USE OF THE SOFTWARE.
+
+======================================================================
+
+The MIT License
+
+Copyright (c) 2026 Huawei Technologies Co., Ltd. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+LICENSE
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+======================================================================
+                                                                 Additional Conditions
+======================================================================
+The Software may be utilized commercially, whether in source or executable forms, provided that you also meet all of the following conditions:
+
+a. You shall not use the Software or its derivative works in systems with processors other than Kunpeng processors.
+b. You shall not make any use of the Software or its derivative works to develop or distribute any software for use in systems with processors other than Kunpeng processors.
+c. You must  include the same restrictions in Section a and b as an enforceable provision in any agreement (e.g., license agreement, terms of use, etc.) governing the use and/or distribution of the Software or Derivative Works.
+
+Kunpeng processors Definition:  For the purposes of this license, "Kunpeng processors" mean the computing processor chipsets branded with "Kunpeng", "鲲鹏" or other brands owned or controlled by Huawei.
+
+
+END OF THE TERMS AND CONDITIONS

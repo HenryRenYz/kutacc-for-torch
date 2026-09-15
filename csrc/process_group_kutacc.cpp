@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Huawei Technologies Co., Ltd. All Rights Reserved.
+ *
+ * Licensed under a modified version of the MIT license. See LICENSE in the project root for license information.
+ */
+
 #include <ATen/ATen.h>
 #include <ATen/Parallel.h>
 #include <kutacc_for_torch/process_group_kutacc.hpp>
